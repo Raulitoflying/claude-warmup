@@ -6,6 +6,11 @@ if [[ -z "${CLAUDE_CODE_OAUTH_TOKEN:-}" && -z "${ANTHROPIC_API_KEY:-}" ]]; then
   exit 1
 fi
 
+if [[ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]]; then
+  export CLAUDE_CODE_OAUTH_TOKEN
+  CLAUDE_CODE_OAUTH_TOKEN="$(printf '%s' "$CLAUDE_CODE_OAUTH_TOKEN" | tr -d '[:space:]')"
+fi
+
 PROMPT="${CLAUDE_WARMUP_PROMPT:-Reply with exactly: OK.}"
 
 if command -v claude >/dev/null 2>&1; then
