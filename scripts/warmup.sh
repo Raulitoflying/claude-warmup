@@ -14,9 +14,8 @@ else
   CLAUDE_BIN="./node_modules/.bin/claude"
 fi
 
-"$CLAUDE_BIN" \
+printf '%s\n' "$PROMPT" | "$CLAUDE_BIN" \
   --print \
   --no-session-persistence \
   --permission-mode dontAsk \
-  --tools "" \
-  "$PROMPT"
+  --tools ""
