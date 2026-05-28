@@ -7,7 +7,7 @@
     "warmup": "bash scripts/warmup.sh"
   },
   "dependencies": {
-    "@anthropic-ai/claude-code": "2.1.88"
+    "@anthropic-ai/claude-code": "^2.1.154"
   },
   "engines": {
     "node": ">=20"
