@@ -1,0 +1,30 @@
+name: Claude warm-up
+
+on:
+  schedule:
+    # Weekdays at 6:00 AM, 11:00 AM, and 4:00 PM Vancouver during daylight saving time (PDT).
+    # Change to 14:00, 19:00, and 00:00 UTC during standard time (PST) if exact local times matter.
+    - cron: "0 13,18,23 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  warmup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      CLAUDE_WARMUP_PROMPT: "Reply with exactly: OK."
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Claude warm-up
+        run: npm run warmup

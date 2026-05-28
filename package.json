@@ -1,0 +1,15 @@
+{
+  "name": "claude-warmup",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Manual and scheduled Claude Code warm-up request.",
+  "scripts": {
+    "warmup": "bash scripts/warmup.sh"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-code": "2.1.88"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
