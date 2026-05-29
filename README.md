@@ -19,7 +19,7 @@ The workflow runs on weekdays at:
 GitHub Actions uses UTC, so the workflow currently uses:
 
 ```yaml
-- cron: "0 13,18,23 * * 1-5"
+- cron: "0 13 * * 1-5"
 ```
 
 You can also run it manually from GitHub Actions with `Run workflow`.
