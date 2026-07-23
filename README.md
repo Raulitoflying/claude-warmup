@@ -12,15 +12,21 @@ This uses your Claude Code subscription login token, not an Anthropic API key, w
 
 The workflow runs on weekdays at:
 
-- 6:00 AM Vancouver during PDT
-- 11:00 AM Vancouver during PDT
-- 4:00 PM Vancouver during PDT
+- 6:00 AM Vancouver during PDT → anchors a window until ~11:00 AM
+- 11:00 AM Vancouver during PDT → anchors a window until ~4:00 PM
+- 4:00 PM Vancouver during PDT → anchors a window until ~9:00 PM
 
-GitHub Actions uses UTC, so the workflow currently uses:
+GitHub Actions uses UTC. During PDT (UTC-7) the workflow uses:
 
 ```yaml
-- cron: "0 13 * * 1-5"
+- cron: "0 13 * * 1-5" # 6:00 AM PDT
+- cron: "0 18 * * 1-5" # 11:00 AM PDT
+- cron: "0 23 * * 1-5" # 4:00 PM PDT
 ```
+
+During PST (UTC-8), shift each cron +1 hour UTC if exact local time matters.
+
+Each successful run starts (or restarts) your ~5-hour Claude Code session for the same subscription account as `CLAUDE_CODE_OAUTH_TOKEN`. It does not keep Current session permanently “on” in Settings — after ~5 hours the UI goes back to “Starts when a message is sent” until the next counted message.
 
 You can also run it manually from GitHub Actions with `Run workflow`.
 
